@@ -32,11 +32,11 @@ class TupleErrorList(list):
     5: The used error message. If this contains the magic word '$message' it will be added with
        ``ng-bind`` rather than rendered inside the list item.
     """
-    ul_format = '<ul class="{1}" ng-show="{0}.{2}" ng-cloak>{3}</ul>'
-    li_format = '<li ng-show="{0}.{1}" class="{2}">{3}</li>'
-    li_format_bind = '<li ng-show="{0}.{1}" class="{2}" ng-bind="{0}.{3}"></li>'
+    ul_format = u'<ul class="{1}" ng-show="{0}.{2}" ng-cloak>{3}</ul>'
+    li_format = u'<li ng-show="{0}.{1}" class="{2}">{3}</li>'
+    li_format_bind = u'<li ng-show="{0}.{1}" class="{2}" ng-bind="{0}.{3}"></li>'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.as_ul()
 
     def __repr__(self):
@@ -57,9 +57,9 @@ class TupleErrorList(list):
         # renders and combine both of these lists
         first = self[0]
         return (pristine_list_items and
-             format_html(self.ul_format, first[0], first[1], '$pristine', mark_safe(''.join(pristine_list_items)))
+             format_html(self.ul_format, first[0], first[1], '$pristine', mark_safe(u''.join(pristine_list_items)))
           or '') + (dirty_list_items and
-             format_html(self.ul_format, first[0], first[1], '$dirty', mark_safe(''.join(dirty_list_items)))
+             format_html(self.ul_format, first[0], first[1], '$dirty', mark_safe(u''.join(dirty_list_items)))
           or '')
 
     def as_text(self):
